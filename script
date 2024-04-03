@@ -1,0 +1,121 @@
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+frame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+frame.ClipsDescendants = true -- This will clip any children outside the frame's bounds
+
+local roundify = Instance.new("UICorner") -- Create a UICorner instance
+roundify.CornerRadius = UDim.new(0, 10) -- Set the corner radius
+roundify.Parent = frame -- Attach it to the frame
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 30)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.Text = "Key System"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+title.TextSize = 20
+title.Parent = frame
+
+local keyInput = Instance.new("TextBox")
+keyInput.Size = UDim2.new(0.8, 0, 0, 30)
+keyInput.Position = UDim2.new(0.1, 0, 0.35, 0)
+keyInput.Text = "Enter Key"
+keyInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+keyInput.BackgroundTransparency = 0.5
+keyInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+keyInput.TextWrapped = true
+keyInput.Parent = frame
+
+local submitButton = Instance.new("TextButton")
+submitButton.Size = UDim2.new(0.35, 0, 0, 40)
+submitButton.Position = UDim2.new(0.05, 0, 0.65, 0)
+submitButton.Text = "Submit"
+submitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+submitButton.BackgroundColor3 = Color3.fromRGB(50, 120, 50)
+submitButton.Parent = frame
+
+local getKeyButton = Instance.new("TextButton")
+getKeyButton.Size = UDim2.new(0.35, 0, 0, 40)
+getKeyButton.Position = UDim2.new(0.6, 0, 0.65, 0)
+getKeyButton.Text = "Get Key"
+getKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+getKeyButton.BackgroundColor3 = Color3.fromRGB(50, 50, 120)
+getKeyButton.Parent = frame
+
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 20, 0, 20)
+closeButton.Position = UDim2.new(1, -25, 0, 5)
+closeButton.Text = "X"
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+closeButton.Parent = frame
+
+-- Dragging functionality
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+title.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+title.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+title.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = false
+        dragInput = nil
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+submitButton.MouseButton1Click:Connect(function()
+    local enteredKey = keyInput.Text
+    if enteredKey == "GVOklTGuSjMwfWFQw3XTRJTXKpHPtvB8" then
+        screenGui:Destroy()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ToastedT0es/synapse-x/main/synapse%20x"))()
+    else
+        submitButton.Text = "Incorrect"
+        wait(5)
+        submitButton.Text = "Submit"
+    end
+end)
+
+getKeyButton.MouseButton1Click:Connect(function()
+    setclipboard("https://loot-link.com/s?u1DK")
+end)
