@@ -1,3 +1,5 @@
+-- Made BY Mr.Alegator
+
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -18,7 +20,7 @@ title.Size = UDim2.new(1, 0, 0, 30)
 title.Position = UDim2.new(0, 0, 0, 0)
 title.Text = "Key System"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
-title.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+title.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
 title.TextSize = 20
 title.Parent = frame
 
@@ -37,7 +39,7 @@ submitButton.Size = UDim2.new(0.35, 0, 0, 40)
 submitButton.Position = UDim2.new(0.05, 0, 0.65, 0)
 submitButton.Text = "Submit"
 submitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-submitButton.BackgroundColor3 = Color3.fromRGB(50, 120, 50)
+submitButton.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
 submitButton.Parent = frame
 
 local getKeyButton = Instance.new("TextButton")
@@ -45,7 +47,7 @@ getKeyButton.Size = UDim2.new(0.35, 0, 0, 40)
 getKeyButton.Position = UDim2.new(0.6, 0, 0.65, 0)
 getKeyButton.Text = "Get Key"
 getKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-getKeyButton.BackgroundColor3 = Color3.fromRGB(50, 50, 120)
+getKeyButton.BackgroundColor3 = Color3.fromRGB(94, 94, 94)
 getKeyButton.Parent = frame
 
 local closeButton = Instance.new("TextButton")
